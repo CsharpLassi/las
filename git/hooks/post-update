@@ -1,0 +1,13 @@
+#!/bin/bash
+refname="$1"
+oldrev="$2"
+newrev="$3"
+
+remote="github"
+
+if  [[ $refname  =~ "master" ]] || [[ $refname  =~ "develop" ]] ; then
+	echo "Upload to $remote";
+	git push $remote $refname
+fi
+
+
