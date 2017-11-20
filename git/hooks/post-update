@@ -5,7 +5,7 @@ newrev="$3"
 
 remote="github"
 
-if  [[ $refname  =~ "master" ]] || [[ $refname  =~ "develop" ]] || [[ $refname  =~ "test" ]] ; then
+if  [[ $refname  =~ "master" ]] || [[ $refname  =~ "develop" ]]; then
 	echo "Upload to $remote";
 	git push $remote $refname
 fi
