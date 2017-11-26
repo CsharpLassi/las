@@ -4,10 +4,29 @@ oldrev="$2"
 newrev="$3"
 
 remote="github"
+executePath="$HOME/bin"
+deploys=()
 
 if  [[ $refname  =~ "master" ]] || [[ $refname  =~ "develop" ]]; then
 	echo "Upload to $remote";
 	git push $remote $refname
+fi
+
+
+if  [[ $refname  =~ "master" ]]; then
+        for deploy in "${deploys[@]}"; do
+                #Deploy
+                echo "Deploy $refname on $deploy"
+                mkdir -p $deploy;
+                env GIT_WORK_TREE=$deploy git checkout -f;
+        done
+
+		#Twitter
+        echo "Twitter Update"
+        url="https://github.com/CsharpLassi/twitterbot"
+        tweet="Eine neue Version vom Twitterbot ist online: $url #Bot #Twitter"
+        $executePath/twitterBot --tweet "$tweet"
+
 fi
 
 
